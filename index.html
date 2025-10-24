@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字媒体技术专业作品集</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* 导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #3498db;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3498db;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        /* 移动端菜单按钮 */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: white;
+            color: #667eea;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 关于部分 */
+        .about {
+            padding: 8rem 2rem;
+            background-color: white;
+        }
+        
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #34495e;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.2rem;
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* 作品分类 */
+        .categories {
+            padding: 8rem 2rem;
+            background-color: #f8f9fa;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-tab {
+            padding: 0.8rem 2rem;
+            background-color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .category-tab:hover,
+        .category-tab.active {
+            background-color: #3498db;
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* 作品网格 */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .work-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .work-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+        
+        .work-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .work-card:hover .work-image img {
+            transform: scale(1.1);
+        }
+        
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        
+        .work-card:hover .work-overlay {
+            opacity: 1;
+        }
+        
+        .view-work-btn {
+            padding: 0.6rem 1.5rem;
+            background-color: white;
+            color: #2c3e50;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .work-card:hover .view-work-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .view-work-btn:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .work-info {
+            padding: 1.5rem;
+        }
+        
+        .work-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .work-category {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* 模态框 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            z-index: 10;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #3498db;
+        }
+        
+        .modal-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .modal-category {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .modal-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-image {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .modal-video {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 16/9;
+        }
+        
+        .modal-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .modal-description {
+            margin-top: 2rem;
+        }
+        
+        .modal-description h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #34495e;
+        }
+        
+        .modal-description p {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        /* 技能部分 */
+        .skills {
+            padding: 8rem 2rem;
+            background-color: white;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-item {
+            text-align: center;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #3498db;
+        }
+        
+        .skill-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .skill-description {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* 页脚 */
+        footer {
+            padding: 3rem 2rem;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                margin: 1rem;
+            }
+            
+            .modal-header,
+            .modal-body {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .work-card {
+                min-width: unset;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">数字媒体作品集</a>
+            <button class="mobile-menu-btn">☰</button>
+            <nav class="nav-links">
+                <a href="#home" class="nav-link active">首页</a>
+                <a href="#about" class="nav-link">关于</a>
+                <a href="#works" class="nav-link">作品</a>
+                <a href="#skills" class="nav-link">技能</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="hero-content fade-in-up">
+            <h1>数字媒体技术专业作品集</h1>
+            <p>探索创意与技术的完美融合，展现多样化的数字媒体创作</p>
+            <a href="#works" class="btn">查看作品</a>
+        </div>
+    </section>
+    
+    <!-- 关于部分 -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <h2 class="section-title">关于专业</h2>
+            <div class="about-content">
+                <div class="about-text fade-in-up">
+                    <h3>数字媒体技术专业</h3>
+                    <p>数字媒体技术是一门融合创意设计与计算机技术的新兴学科，专注于培养具备数字内容创作、媒体制作与传播能力的复合型人才。</p>
+                    <p>本专业作品集展示了在视觉设计、交互设计、数字影像制作等领域的实践成果，体现了学生们在技术应用与艺术表达方面的综合能力。</p>
+                    <p>通过本作品集，您将看到多元化的数字媒体作品，包括海报设计、文创产品设计、店铺视觉设计以及数字影像创作等多个方向。</p>
+                </div>
+                <div class="about-image fade-in-up delay-1">
+                    <img src="img/作品/标题海报1.jpg" alt="数字媒体技术专业" onerror="this.src='https://via.placeholder.com/600x400?text=专业图片'; this.onerror=null;">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 作品部分 -->
+    <section class="categories" id="works">
+        <div class="section-container">
+            <h2 class="section-title">作品展示</h2>
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all">全部作品</button>
+                <button class="category-tab" data-category="poster">海报设计</button>
+                <button class="category-tab" data-category="food">小吃店设计</button>
+                <button class="category-tab" data-category="creative">文创设计</button>
+                <button class="category-tab" data-category="video">视频作品</button>
+            </div>
+            <div class="works-grid">
+                <!-- 海报设计作品 -->
+                <div class="work-card fade-in-up" data-category="poster" data-id="poster1">
+                    <div class="work-image">
+                        <img src="img/作品/标题海报1.jpg" alt="标题海报设计" onerror="this.src='https://via.placeholder.com/600x400?text=海报设计'; this.onerror=null;">
+                        <div class="work-overlay">
+                            <button class="view-work-btn" data-id="poster1">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">标题海报设计</h3>
+                        <p class="work-category">海报设计</p>
+                    </div>
+                </div>
+                
+                <!-- 小吃店设计作品 -->
+                <div class="work-card fade-in-up delay-1" data-category="food" data-id="food1">
+                    <div class="work-image">
+                        <img src="img/作品/小吃店设计/宣传图.jpg" alt="小吃店宣传图" onerror="this.src='https://via.placeholder.com/600x400?text=小吃店设计'; this.onerror=null;">
+                        <div class="work-overlay">
+                            <button class="view-work-btn" data-id="food1">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">小吃店宣传设计</h3>
+                        <p class="work-category">小吃店设计</p>
+                    </div>
+                </div>
+                
+                <div class="work-card fade-in-up delay-2" data-category="food" data-id="food2">
+                    <div class="work-image">
+                        <img src="img/作品/小吃店设计/菜单设计.jpg" alt="小吃店菜单设计" onerror="this.src='https://via.placeholder.com/600x400?text=菜单设计'; this.onerror=null;">
+                        <div class="work-overlay">
+                            <button class="view-work-btn" data-id="food2">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">小吃店菜单设计</h3>
+                        <p class="work-category">小吃店设计</p>
+                    </div>
+                </div>
+                
+                <div class="work-card fade-in-up delay-3" data-category="food" data-id="food3">
+                    <div class="work-image">
+                        <img src="img/作品/小吃店设计/品牌标识.jpg" alt="小吃店品牌标识" onerror="this.src='https://via.placeholder.com/600x400?text=品牌标识'; this.onerror=null;">
+                        <div class="work-overlay">
+                            <button class="view-work-btn" data-id="food3">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">小吃店品牌标识</h3>
+                        <p class="work-category">小吃店设计</p>
+                    </div>
+                </div>
+                
+                <!-- 文创设计作品 -->
+                <div class="work-card fade-in-up" data-category="creative" data-id="creative1">
+                    <div class="work-image">
+                        <img src="img/作品/文创设计/产品1.jpg" alt="文创产品设计" onerror="this.src='https://via.placeholder.com/600x400?text=文创设计'; this.onerror=null;">
+                        <div class="work-overlay">
+                            <button class="view-work-btn" data-id="creative1">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">文创产品设计</h3>
+                        <p class="work-category">文创设计</p>
+                    </div>
+                </div>
+                
+                <div class="work-card fade-in-up delay-1" data-category="creative" data-id="creative2">
+                    <div class="work-image">
+                        <img src="img/作品/文创设计/包装设计.jpg" alt="文创包装设计" onerror="this.src='https://via.placeholder.com/600x400?text=包装设计'; this.onerror=null;">
+                        <div class="work-overlay">
+                            <button class="view-work-btn" data-id="creative2">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">文创包装设计</h3>
+                        <p class="work-category">文创设计</p>
+                    </div>
+                </div>
+                
+                <!-- 视频作品 -->
+                <div class="work-card fade-in-up delay-2" data-category="video" data-id="video1">
+                    <div class="work-image">
+                        <img src="https://via.placeholder.com/600x400?text=春节记忆" alt="春节记忆">
+                        <div class="work-overlay">
+                            <button class="view-work-btn" data-id="video1">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">春节记忆</h3>
+                        <p class="work-category">视频作品</p>
+                    </div>
+                </div>
+                
+                <div class="work-card fade-in-up delay-3" data-category="video" data-id="video2">
+                    <div class="work-image">
+                        <img src="https://via.placeholder.com/600x400?text=被手机围困的孤岛" alt="被手机围困的孤岛">
+                        <div class="work-overlay">
+                            <button class="view-work-btn" data-id="video2">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">被手机围困的孤岛</h3>
+                        <p class="work-category">视频作品</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 技能部分 -->
+    <section class="skills" id="skills">
+        <div class="section-container">
+            <h2 class="section-title">专业技能</h2>
+            <div class="skills-container">
+                <div class="skill-item fade-in-up">
+                    <div class="skill-icon">🎨</div>
+                    <h3 class="skill-title">视觉设计</h3>
+                    <p class="skill-description">掌握平面设计、UI/UX设计、色彩理论等专业知识，能够创作出美观且实用的视觉作品。</p>
+                </div>
+                
+                <div class="skill-item fade-in-up delay-1">
+                    <div class="skill-icon">📱</div>
+                    <h3 class="skill-title">交互设计</h3>
+                    <p class="skill-description">了解用户体验设计原则，能够设计直观、流畅的用户界面和交互流程。</p>
+                </div>
+                
+                <div class="skill-item fade-in-up delay-2">
+                    <div class="skill-icon">🎬</div>
+                    <h3 class="skill-title">数字影像</h3>
+                    <p class="skill-description">掌握摄影、摄像、视频剪辑、特效制作等数字影像创作技能。</p>
+                </div>
+                
+                <div class="skill-item fade-in-up delay-3">
+                    <div class="skill-icon">💻</div>
+                    <h3 class="skill-title">前端开发</h3>
+                    <p class="skill-description">具备HTML、CSS、JavaScript等前端开发能力，能够实现响应式网页设计。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <p>数字媒体技术专业作品集展示平台，旨在展示学生们在数字媒体创作领域的实践成果。</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 数字媒体技术专业. 版权所有.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 作品详情模态框 -->
+    <div class="modal" id="work-modal">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">作品标题</h2>
+                <p class="modal-category" id="modal-category">作品分类</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery" id="modal-gallery"></div>
+                <div class="modal-description">
+                    <h4>作品描述</h4>
+                    <p id="modal-description">作品详细描述内容...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 作品数据
+        const workData = {
+            poster1: {
+                title: '标题海报设计',
+                category: '海报设计',
+                images: ['img/作品/标题海报1.jpg'],
+                description: '这是一张创意标题海报设计作品，采用现代简约风格，通过鲜明的色彩对比和独特的排版布局，有效传达主题信息。作品注重视觉层次感，使用大胆的字体设计和简洁的图形元素，创造出强烈的视觉冲击力。'
+            },
+            food1: {
+                title: '小吃店宣传设计',
+                category: '小吃店设计',
+                images: ['img/作品/小吃店设计/宣传图.jpg'],
+                description: '为小吃店设计的宣传图，融合了传统与现代的设计元素，突出小吃店的特色和美食文化。通过温暖的色调和生动的食物插画，营造出诱人的视觉效果，吸引顾客的注意力。'
+            },
+            food2: {
+                title: '小吃店菜单设计',
+                category: '小吃店设计',
+                images: ['img/作品/小吃店设计/菜单设计.jpg'],
+                description: '精心设计的小吃店菜单，采用直观清晰的分类和排版，使用与品牌一致的色彩系统。菜单不仅展示了食物信息，还通过巧妙的设计元素增强了品牌形象，提升了顾客的用餐体验。'
+            },
+            food3: {
+                title: '小吃店品牌标识',
+                category: '小吃店设计',
+                images: ['img/作品/小吃店设计/品牌标识.jpg'],
+                description: '为小吃店设计的品牌标识，简洁易识别，融入了店铺特色元素。标识设计考虑了多场景应用，能够在不同媒介上保持良好的视觉效果，有助于提升品牌辨识度和记忆点。'
+            },
+            creative1: {
+                title: '文创产品设计',
+                category: '文创设计',
+                images: ['img/作品/文创设计/产品1.jpg'],
+                description: '融合传统文化元素与现代设计理念的文创产品设计。作品注重实用性与艺术性的结合，通过创新的设计手法将文化内涵转化为当代生活物品，既保留了文化特色，又符合现代人的审美需求。'
+            },
+            creative2: {
+                title: '文创包装设计',
+                category: '文创设计',
+                images: ['img/作品/文创设计/包装设计.jpg'],
+                description: '为文创产品设计的包装方案，采用环保材料和创新结构设计。包装不仅保护产品，还通过独特的视觉语言传达产品的文化价值，增强产品的整体质感和礼品属性。'
+            },
+            video1: {
+                title: '春节记忆',
+                category: '视频作品',
+                videos: ['img/作品/春节记忆.mp4'],
+                description: '以春节为主题的纪录片作品，通过真实的人物故事和细腻的镜头语言，展现了传统节日的文化内涵和现代变迁。视频采用4K高清拍摄，结合精心的剪辑和配乐，营造出温馨感人的氛围。'
+            },
+            video2: {
+                title: '被手机围困的孤岛',
+                category: '视频作品',
+                videos: ['img/作品/被手机围困的孤岛.mp4'],
+                description: '探讨现代社会数字依赖现象的实验性短片。作品通过象征手法和独特的视觉风格，表达了对当代人过度依赖手机等数字设备的思考，引发观众对数字生活方式的反思。'
+            }
+        };
+        
+        // DOM元素
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-link');
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const workCards = document.querySelectorAll('.work-card');
+        const modal = document.getElementById('work-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCategory = document.querySelector('.modal-category');
+        const modalGallery = document.getElementById('modal-gallery');
+        const modalDescription = document.getElementById('modal-description');
+        const viewWorkBtns = document.querySelectorAll('.view-work-btn');
+        
+        // 移动端菜单切换
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '×' : '☰';
+        });
+        
+        // 导航链接点击效果
+        navItems.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // 移除所有激活状态
+                navItems.forEach(item => item.classList.remove('active'));
+                // 添加当前激活状态
+                e.currentTarget.classList.add('active');
+                // 关闭移动菜单
+                navLinks.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+                
+                // 平滑滚动
+                const targetId = e.currentTarget.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 分类筛选
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 移除所有激活状态
+                categoryTabs.forEach(item => item.classList.remove('active'));
+                // 添加当前激活状态
+                tab.classList.add('active');
+                
+                const category = tab.getAttribute('data-category');
+                
+                // 筛选作品
+                workCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                        // 重新触发动画
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // 打开作品详情模态框
+        function openWorkModal(workId) {
+            const work = workData[workId];
+            if (!work) {
+                console.error('作品数据不存在');
+                return;
+            }
+            
+            // 设置模态框内容
+            modalTitle.textContent = work.title;
+            modalCategory.textContent = work.category;
+            modalDescription.textContent = work.description;
+            
+            // 清空并设置图库
+            modalGallery.innerHTML = '';
+            
+            // 添加图片
+            if (work.images && work.images.length > 0) {
+                work.images.forEach(imageSrc => {
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'modal-image';
+                    const img = document.createElement('img');
+                    img.src = imageSrc;
+                    img.alt = work.title;
+                    img.onerror = function() {
+                        this.src = `https://via.placeholder.com/800x600?text=${encodeURIComponent(work.title)}`;
+                        this.onerror = null;
+                    };
+                    imageContainer.appendChild(img);
+                    modalGallery.appendChild(imageContainer);
+                });
+            }
+            
+            // 添加视频
+            if (work.videos && work.videos.length > 0) {
+                work.videos.forEach(videoSrc => {
+                    const videoContainer = document.createElement('div');
+                    videoContainer.className = 'modal-video';
+                    const video = document.createElement('video');
+                    video.src = videoSrc;
+                    video.controls = true;
+                    videoContainer.appendChild(video);
+                    modalGallery.appendChild(videoContainer);
+                });
+            }
+            
+            // 显示模态框
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 关闭模态框
+        function closeWorkModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // 暂停所有视频
+            const videos = modalGallery.querySelectorAll('video');
+            videos.forEach(video => {
+                video.pause();
+            });
+        }
+        
+        // 绑定查看详情按钮事件
+        viewWorkBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const workId = btn.getAttribute('data-id');
+                openWorkModal(workId);
+            });
+        });
+        
+        // 点击作品图片也可以打开详情
+        workCards.forEach(card => {
+            const workImage = card.querySelector('.work-image img');
+            workImage.addEventListener('click', () => {
+                const workId = card.getAttribute('data-id');
+                openWorkModal(workId);
+            });
+        });
+        
+        // 关闭模态框事件
+        closeModal.addEventListener('click', closeWorkModal);
+        
+        // 点击模态框背景关闭
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeWorkModal();
+            }
+        });
+        
+        // 按ESC键关闭模态框
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeWorkModal();
+            }
+        });
+        
+        // 滚动监听，改变导航栏样式
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
+            }
+            
+            // 滚动时更新导航激活状态
+            const sections = document.querySelectorAll('section');
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // 页面加载时的动画效果
+        document.addEventListener('DOMContentLoaded', () => {
+            // 给元素添加动画类
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            });
+            
+            // 触发动画
+            setTimeout(() => {
+                animatedElements.forEach(element => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
